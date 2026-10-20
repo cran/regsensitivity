@@ -1,0 +1,301 @@
+---
+title: "regsensitivity: a tour"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{regsensitivity: a tour}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6, fig.height = 4
+)
+```
+
+This vignette replicates the BFG2020 empirical application used in the Stata
+`regsensitivity` vignette, walking through the **Diegert-Masten-Poirier
+(2026)** and **Oster (2019) / Masten-Poirier (2026)** analyses. It shows
+how to call the package; for what the numbers mean, what to conclude from
+them and what to write in a paper, see
+`vignette("interpreting-results")`.
+
+## The setup
+
+Every analysis in this package concerns the same picture.
+
+```{r model-fig, echo = FALSE, out.width = "100%", fig.alt = "A diagram of the model. Boxes mark the observed variables W1, X and Y; a dashed circle marks the unobserved W2. Solid arrows pi-1 and gamma-1 run from W1 into X and Y, dashed arrows pi-2 and gamma-2 run from W2 into X and Y, and a heavy arrow labelled beta-long runs from X to Y. A dotted double-headed arrow between W1 and W2 is labelled association left unrestricted."}
+knitr::include_graphics("figures/model.png")
+```
+
+You want $\beta_{\text{long}}$, the coefficient on the treatment $X$ in a
+regression that adjusts for *everything* relevant, observed or not. You can
+only run the *medium* regression, which adjusts for the observed covariates
+and returns $\beta_{\text{med}}$. The two agree exactly when $\pi_2 = 0$: no
+selection on unobservables, the dashed arrow into $X$ erased. Sensitivity
+analysis asks how far that can fail before your conclusion does.
+
+Note what the baseline does *not* assume. It leaves $\gamma_2$ free -- the
+unobservable may matter arbitrarily much for the outcome -- and it leaves the
+$W_1$--$W_2$ association free. That is why the observed controls being
+endogenous is not, on its own, fatal.
+
+The observed covariates split in two. The ones you name in `compare` are the
+**calibration** covariates $W_1$: the yardstick the unobservable is measured
+against. Everything else is a **control** covariate $W_0$, adjusted for but
+never used as a yardstick -- fixed effects and nuisance controls belong here.
+(Stata's `regsensitivity` and this package's argument names call $W_1$ the
+*comparison set*, which is where `compare` gets its name; the DMP paper calls
+it the calibration set. They are the same thing.)
+
+```{r}
+library(regsensitivity)
+library(ggplot2)
+data(bfg2020)
+bfg2020$statea <- factor(bfg2020$statea)
+
+form <- avgrep2000to2016 ~ tye_tfe890_500kNI_100_l6 +
+    log_area_2010 + lat + lon + temp_mean + rain_mean + elev_mean +
+    d_coa + d_riv + d_lak + ave_gyi + statea
+compare <- c("log_area_2010", "lat", "lon", "temp_mean", "rain_mean",
+             "elev_mean", "d_coa", "d_riv", "d_lak", "ave_gyi")
+```
+
+So here the geographic and climate variables are $W_1$ and the state fixed
+effects `statea` are $W_0$: the omitted variable's importance is judged
+against geography and climate, never against state dummies. In general:
+
+```{r compare-fig, echo = FALSE, out.width = "100%", fig.alt = "A regsen_summary call with braces under its parts: y is the outcome Y, x is the treatment X, the terms named by compare are the calibration covariates W1, and the remaining right-hand-side terms are the control covariates W0, which are partialled out. A dashed circle stands for the unobserved W2, which appears in no formula."}
+knitr::include_graphics("figures/covariates.png")
+```
+
+`nocompare` draws the same line from the other side, naming $W_0$ instead;
+give at most one of the two. If you give neither, every control enters $W_1$.
+
+## The three sensitivity parameters
+
+Rather than assume $\pi_2 = 0$, DMP bound how large the unobservable's role
+can be. Three parameters do the work, and each caps one feature of the
+picture above:
+
+```{r sens-fig, echo = FALSE, out.width = "100%", fig.alt = "The same model diagram, with the dashed arrow from W2 into X tagged A3, the dashed arrow from W2 into Y tagged A5, and the dotted W1-W2 edge tagged A6. A key gives r-X as the ratio of the standard deviations of the two indices entering X, bounded by rxbar; r-Y likewise for Y, bounded by rybar; and the partial correlation of W2 with W1 given W0 lying in the interval from clow to cbar."}
+knitr::include_graphics("figures/sensparams.png")
+```
+
+* `rxbar` bounds $r_X$: how much the unobservable moves the **treatment**,
+  as a multiple of how much the calibration covariates do. `rxbar = 1` says
+  the unobservable is at most as important as $W_1$ taken together.
+* `rybar` bounds $r_Y$: the same ratio for the **outcome**. Left at `Inf`
+  by default, which assumes nothing about $\gamma_2$.
+* `cbar` and `clow` bound how much of the unobservable the calibration
+  covariates already explain. The default `cbar = 1` imposes nothing, and is
+  the case in which the controls may be arbitrarily endogenous.
+
+Because $r_X$ and $r_Y$ are *relative*, their scale only means something
+against a reference; `calibrate_rho()` and `calibrate_partial_r2()` supply
+the point-identified reference values DMP propose.
+
+The "short" regression coefficient (with no controls) and the "medium"
+regression coefficient (with state FE and the comparison controls) give a
+first sense of how much controls move the estimate:
+
+```{r}
+short <- lm(avgrep2000to2016 ~ tye_tfe890_500kNI_100_l6, data = bfg2020)
+med   <- lm(form, data = bfg2020)
+coef(short)[2]
+coef(med)["tye_tfe890_500kNI_100_l6"]
+```
+
+## DMP (2026) bounds
+
+`regsen_bounds()` is the workhorse. Out of the box it sweeps over a grid of
+`rxbar` from 0 to the threshold where the identified set first becomes
+$(-\infty,+\infty)$, holding `cbar` fixed at the supplied value.
+
+```{r}
+bnds <- regsen_bounds(form, bfg2020, compare = compare, cbar = 0.1)
+print(bnds)
+```
+
+The bounds widen monotonically as `rxbar` (the strength of the unobservable's
+effect on the treatment) grows. The breakdown point reported in the header
+is the `rxbar` value at which the hypothesis ($\beta>0$, in this case)
+first fails.
+
+```{r}
+plot(bnds)
+```
+
+Sweeping over multiple `cbar` values lets you see how stronger correlations
+between the comparison controls and the unobservable affect the bounds:
+
+```{r}
+multi <- regsen_bounds(form, bfg2020, compare = compare,
+                        rxbar = seq(0, 2, length.out = 21),
+                        cbar = c(0, 0.2, 0.4, 0.6, 0.8, 1.0))
+plot(multi)
+```
+
+### Constrained `rybar`
+
+Setting `rybar` to a finite value adds a constraint on the unobservable's
+effect on the outcome. When `cbar > 0` this is a nonconvex problem and we
+solve it with a global optimizer (`nloptr` / DIRECT-L); when `cbar = 0` it
+has a closed form. Both cases run through the same `regsen_bounds()` call:
+
+```{r}
+fin <- regsen_bounds(form, bfg2020, compare = compare, rybar = 2)
+print(fin)
+```
+
+You can also express `rybar` as a function of `rxbar`, e.g. `rybar = rxbar`:
+
+```{r}
+expr <- regsen_bounds(form, bfg2020, compare = compare,
+                       rybar_expr = function(rx) rx,
+                       rxbar = seq(0, 1, 0.1))
+expr$results
+```
+
+## DMP breakdown
+
+`regsen_breakdown()` reports the breakdown point as a function of one of
+the sensitivity parameters, holding the others fixed:
+
+```{r}
+bd <- regsen_breakdown(form, bfg2020, compare = compare,
+                        cbar = seq(0, 1, 0.05))
+plot(bd)
+```
+
+You can also sweep across hypothesis values:
+
+```{r}
+hyp <- regsen_breakdown(form, bfg2020, compare = compare,
+                         beta = bnd_lb(seq(-1, 1, 0.2)))
+print(hyp)
+```
+
+### The frontier in the other direction
+
+`direction = "rybar"` reports the breakdown point in `rybar` at each
+`rxbar` instead: how much the unobservable may matter for the *outcome*
+before the conclusion fails, given how much it may matter for the
+treatment. This is the frontier of DMP Theorem 4, and the two directions
+trace the same curve in the $(\bar r_X, \bar r_Y)$ plane.
+
+```{r}
+fr <- regsen_breakdown(form, bfg2020, compare = compare, cbar = 1,
+                        direction = "rybar",
+                        rxbar = c(0.5, 1, 2, 4))
+fr$results
+```
+
+An `Inf` says the conclusion survives every `rybar` at that `rxbar`; the
+mirror image, an `Inf` from the default direction, says it survives every
+`rxbar` at that `rybar`.
+
+### Asserting endogenous controls
+
+`cbar` caps how much of the unobservable the comparison controls can
+explain. `clow` is the other end of DMP Assumption A6: setting it above
+zero asserts that the controls are *at least* that endogenous, which
+narrows the identified set rather than widening it.
+
+```{r}
+vapply(c(0, 0.9, 0.99), function(cl) {
+    regsen_breakdown(form, bfg2020, compare = compare,
+                      cbar = 1, clow = cl)$results$breakdown
+}, numeric(1))
+```
+
+## Oster (2019) bounds
+
+Switching to the Oster analysis with `analysis = "oster"`:
+
+```{r}
+o <- regsen_bounds(form, bfg2020, compare = compare,
+                    analysis = "oster")
+print(o)
+```
+
+Plotting the equality identified set (rotated so that delta is on the
+x-axis and beta on the y-axis):
+
+```{r}
+o2 <- regsen_bounds(form, bfg2020, compare = compare,
+                     analysis = "oster",
+                     delta = seq(-3, 3, 0.05))
+plot(o2, ylim = c(-5, 8))
+```
+
+### Oster, |delta| <= d (bound)
+
+```{r}
+ob <- regsen_bounds(form, bfg2020, compare = compare,
+                     analysis = "oster",
+                     delta = seq(0, 0.999, 0.001),
+                     delta_type = "bound")
+plot(ob, ylim = c(-50, 50))
+```
+
+## Oster breakdown
+
+```{r}
+obd_eq <- regsen_breakdown(form, bfg2020, compare = compare,
+                            analysis = "oster",
+                            r2long = seq(0.15, 1, 0.05),
+                            beta = bnd_eq(0))
+plot(obd_eq)
+
+obd_sign <- regsen_breakdown(form, bfg2020, compare = compare,
+                              analysis = "oster",
+                              r2long = seq(0.15, 1, 0.05))
+plot(obd_sign)
+```
+
+## Using several cores
+
+Everything above runs on one core by default. The finite-`rybar`
+sweeps and the breakdown frontiers are the slow parts -- each grid point
+or frontier value is a global optimization -- and they are independent,
+so they can be spread across cores. Set the session default once:
+
+```{r cores, eval = FALSE}
+regsen_cores(2)        # a number of cores
+```
+
+`regsen_cores("auto")` takes every core but two, leaving the session and
+whatever else the machine is doing responsive. Whatever you set, at most
+two are used while `R CMD check --as-cran` runs, which forbids more.
+
+or pass `ncores` to a single call of `regsen_bounds()`,
+`regsen_breakdown()`, `regsen_multi()` or `regsen_boot()`. Results are
+identical whatever the number of cores; the bootstrap seeds each
+replicate itself, and nothing else draws random numbers.
+
+## Summary call
+
+When you don't know where to start, `regsen_summary()` runs the default
+DMP bounds analysis plus an Oster breakdown sweep at a few standard
+`r2long` values, matching the behaviour of Stata's `regsensitivity` with
+no subcommand.
+
+```{r}
+s <- regsen_summary(form, bfg2020, compare = compare)
+print(s)
+```
+
+## References
+
+* Diegert, P., Masten, M., and Poirier, A. (2026). Assessing Omitted
+  Variable Bias when the Controls are Endogenous. arXiv:2206.02303.
+* Oster, E. (2019). Unobservable Selection and Coefficient Stability:
+  Theory and Evidence. *JBES* 37(2), 187--204.
+* Masten, M., and Poirier, A. (2026). The Effect of Omitted Variables on
+  the Sign of Regression Coefficients. *AER* 116(7), 2685--2710.
+* Bazzi, S., Fiszbein, M., and Gebresilasse, M. (2020). Frontier
+  Culture: The Roots and Persistence of "Rugged Individualism" in the
+  United States. *Econometrica* 88(6), 2329--2368.
