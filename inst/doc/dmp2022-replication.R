@@ -58,7 +58,7 @@ cmp <- compare_published(
                   "r^bp at cbar = 1, rybar = rxbar"),
     published = c(0.804, 0.959),
     digits    = c(3, 3),          # as printed in the paper's Table 1
-    computed  = c(bp_conservative$breakdown, bp_relaxed$breakdown)
+    computed  = c(breakdown_point(bp_conservative), breakdown_point(bp_relaxed))
 )
 knitr::kable(cmp, caption = "Breakdown points: this package vs DMP (2026).")
 
@@ -170,14 +170,14 @@ ggplot(df, aes(x = rxbar, linetype = spec)) +
     theme_regsen(base_size = 10)
 
 ## ----fig1-left-crossings--------------------------------------------------------------------------
-c(rybar_inf   = abs(solid$breakdown),     # paper: 0.804
-  rybar_rxbar = abs(dashed$breakdown))    # paper: 0.959
+c(rybar_inf   = breakdown_point(solid),     # paper: 0.804
+  rybar_rxbar = breakdown_point(dashed))    # paper: 0.959
 
 ## ----fig1-right, fig.height = 4.5-----------------------------------------------------------------
 frontier <- function(cbar, rxs) {
     r <- regsen_breakdown(form, bfg2020, compare = w1, cbar = cbar,
                            direction = "rybar", rxbar = rxs)
-    data.frame(rxbar = rxs, rybar = r$results$breakdown,
+    data.frame(rxbar = rxs, rybar = breakdown_point(r),
                cbar = factor(cbar))
 }
 
@@ -205,13 +205,13 @@ ggplot(fr, aes(x = rxbar, y = rybar, group = cbar)) +
 
 ## ----frontier-limit-------------------------------------------------------------------------------
 vapply(c(0.7, 0.6, 0.55, 0.5), function(ry) {
-    regsen_breakdown(form, bfg2020, compare = w1,
-                     cbar = 1, rybar = ry)$results$breakdown
+    breakdown_point(regsen_breakdown(form, bfg2020, compare = w1,
+                                     cbar = 1, rybar = ry))
 }, numeric(1))
 
 ## ----frontier-arm---------------------------------------------------------------------------------
-regsen_bounds(form, bfg2020, compare = w1,
-              cbar = 1, rxbar = c(2, 4, 10), rybar = 0.5)$results
+identified_set(regsen_bounds(form, bfg2020, compare = w1,
+                             cbar = 1, rxbar = c(2, 4, 10), rybar = 0.5))
 
 ## ----fig1-with-rho, fig.height = 5----------------------------------------------------------------
 # The breakdown point as a function of cbar alone, with each covariate's
@@ -239,12 +239,12 @@ plot(bd_cbar) +
 
 ## ----fig3-breakdown-------------------------------------------------------------------------------
 fig3 <- regsen_bounds(form, bfg2020, compare = c(w1, "statea"), cbar = 1)
-c(`w1 only`            = abs(bp_conservative$breakdown),  # paper: ~0.80
-  `w1 + state effects` = abs(fig3$breakdown))             # paper: ~0.30
+c(`w1 only`            = breakdown_point(bp_conservative),  # paper: ~0.80
+  `w1 + state effects` = breakdown_point(fig3))             # paper: ~0.30
 
 ## ----fig3-assert, echo = FALSE--------------------------------------------------------------------
-stopifnot(is.finite(fig3$breakdown),
-          abs(fig3$breakdown) > 0.25, abs(fig3$breakdown) < 0.35)
+stopifnot(is.finite(breakdown_point(fig3)),
+          breakdown_point(fig3) > 0.25, breakdown_point(fig3) < 0.35)
 
 ## ----ry-finite------------------------------------------------------------------------------------
 fy <- regsen_bounds(form, bfg2020, compare = w1, rybar = 2,

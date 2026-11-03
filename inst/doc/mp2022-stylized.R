@@ -41,11 +41,11 @@ plot(res2, ylim = c(0, 2),
      title = "Figure 2 (stylized): cumulative identified set")
 
 ## ----mp-maxovb-inf------------------------------------------------------------
-bmed <- regsen_bounds(form, dat, analysis = "oster",
-                       delta = 0, r2long = 1)$dgp$beta_med
+bmed <- coef(regsen_bounds(form, dat, analysis = "oster",
+                            delta = 0, r2long = 1))[["medium"]]
 sapply(c(0.5, 1, round(bmed, 3) + 0.001), function(M) {
-    regsen_breakdown(form, dat, analysis = "oster",
-                      r2long = 1, maxovb = M)$results$breakdown[1]
+    breakdown_point(regsen_breakdown(form, dat, analysis = "oster",
+                                     r2long = 1, maxovb = M))[1]
 })
 
 ## ----mp-maxovb----------------------------------------------------------------
@@ -54,11 +54,11 @@ out <- lapply(ovbs, function(M) {
     r <- regsen_breakdown(form, dat,
                            analysis = "oster",
                            r2long = 1, maxovb = M)
-    data.frame(maxovb = M, breakdown = r$results$breakdown[1])
+    data.frame(maxovb = M, breakdown = breakdown_point(r)[1])
 })
 out <- do.call(rbind, out)
-uncapped <- regsen_breakdown(form, dat, analysis = "oster",
-                              r2long = 1)$results$breakdown[1]
+uncapped <- breakdown_point(regsen_breakdown(form, dat, analysis = "oster",
+                                             r2long = 1))[1]
 
 ggplot(out, aes(maxovb, breakdown)) +
     geom_hline(yintercept = 1, linetype = "dotted", colour = "grey40") +

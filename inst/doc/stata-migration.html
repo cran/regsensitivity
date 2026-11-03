@@ -505,69 +505,53 @@ subscripts; here the results are already a data frame, so
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; === DMP (2026) bounds ===</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis ----- Bounds</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis -- Bounds [DMP (2026)]</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------------------</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Analysis:          DMP (2026)</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Treatment:         tye_tfe890_500kNI_100_l6</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Outcome:           avgrep2000to2016</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &gt; 0</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Breakdown point:   0.8036</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; --- Summary statistics ----------------------------------</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;   Beta (short)                  1.9246</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;   Beta (medium)                 2.0548</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;   R2 (short)                    0.0328</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt;   R2 (medium)                   0.1051</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt;   Var(Y)                      101.7387</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt;   Var(X)                        0.9014</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt;   Var(X_Residual)               0.8823</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; --- Results ---------------------------------------------</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt;     rxbar rybar   cbar     bmin   bmax</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt;         0  +Inf      1   2.0548 2.0548</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt;  0.098939  +Inf      1   1.9064 2.2031</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt;   0.19788  +Inf      1   1.7535  2.356</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt;   0.29682  +Inf      1   1.5906 2.5189</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt;   0.39576  +Inf      1   1.4106 2.6989</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt;   0.49469  +Inf      1   1.2026 2.9069</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt;   0.59363  +Inf      1  0.94779 3.1617</span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt;   0.69257  +Inf      1  0.60803 3.5015</span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt;   0.79151  +Inf      1 0.086812 4.0227</span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="co">#&gt;   0.89045  +Inf      1 -0.99272 5.1022</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="co">#&gt;   0.98939  +Inf      1     -Inf   +Inf</span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co">#&gt; === Oster (2019) breakdown ===</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis ----- Breakdown Frontier</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------------------</span></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co">#&gt; Analysis:          Oster (2019)</span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co">#&gt; Treatment:         tye_tfe890_500kNI_100_l6</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co">#&gt; Outcome:           avgrep2000to2016</span></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &gt; 0</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co">#&gt; --- Summary statistics ----------------------------------</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="co">#&gt;   Beta (short)                  1.9246</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="co">#&gt;   Beta (medium)                 2.0548</span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="co">#&gt;   R2 (short)                    0.0328</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co">#&gt;   R2 (medium)                   0.1051</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="co">#&gt;   Var(Y)                      101.7387</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="co">#&gt;   Var(X)                        0.9014</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="co">#&gt;   Var(X_Residual)               0.8823</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="co">#&gt; --- Results ---------------------------------------------</span></span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="co">#&gt;    index breakdown</span></span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="co">#&gt;  0.13667   0.97393</span></span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="co">#&gt;  0.23667   0.97315</span></span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="co">#&gt;  0.33667   0.97232</span></span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="co">#&gt;  0.43667   0.97145</span></span>
-<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a><span class="co">#&gt;  0.53667   0.97052</span></span>
-<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a><span class="co">#&gt;  0.63667   0.96954</span></span>
-<span id="cb4-65"><a href="#cb4-65" tabindex="-1"></a><span class="co">#&gt;  0.73667    0.9685</span></span>
-<span id="cb4-66"><a href="#cb4-66" tabindex="-1"></a><span class="co">#&gt;  0.83667   0.96739</span></span>
-<span id="cb4-67"><a href="#cb4-67" tabindex="-1"></a><span class="co">#&gt;  0.93667   0.96622</span></span>
-<span id="cb4-68"><a href="#cb4-68" tabindex="-1"></a><span class="co">#&gt;        1   0.96543</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Model:             avgrep2000to2016 ~ tye_tfe890_500kNI_100_l6</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Beta (medium):     2.0548</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &gt; 0</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Breakdown point:   0.8036</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt;     rxbar rybar   cbar     bmin   bmax</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;         0  +Inf      1   2.0548 2.0548</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;  0.098939  +Inf      1   1.9064 2.2031</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt;   0.19788  +Inf      1   1.7535  2.356</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt;   0.29682  +Inf      1   1.5906 2.5189</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt;   0.39576  +Inf      1   1.4106 2.6989</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt;   0.49469  +Inf      1   1.2026 2.9069</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt;   0.59363  +Inf      1  0.94779 3.1617</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt;   0.69257  +Inf      1  0.60803 3.5015</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt;   0.79151  +Inf      1 0.086812 4.0227</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt;   0.89045  +Inf      1 -0.99272 5.1022</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt;   0.98939  +Inf      1     -Inf   +Inf</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; Use summary() for the specification and full results.</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt; === Oster (2019) breakdown ===</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis -- Breakdown Frontier [Oster (2019)]</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------------------</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt; Model:             avgrep2000to2016 ~ tye_tfe890_500kNI_100_l6</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="co">#&gt; Beta (medium):     2.0548</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &gt; 0</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt;    index breakdown</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt;  0.13667   0.97393</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co">#&gt;  0.23667   0.97315</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co">#&gt;  0.33667   0.97232</span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co">#&gt;  0.43667   0.97145</span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="co">#&gt;  0.53667   0.97052</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co">#&gt;  0.63667   0.96954</span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="co">#&gt;  0.73667    0.9685</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co">#&gt;  0.83667   0.96739</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="co">#&gt;  0.93667   0.96622</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="co">#&gt;        1   0.96543</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co">#&gt; Use summary() for the specification and full results.</span></span></code></pre></div>
 </div>
 <div id="bounds-at-a-single-cbar" class="section level3">
 <h3>Bounds at a single <code>cbar</code></h3>
@@ -609,36 +593,28 @@ subscripts; here the results are already a data frame, so
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>                           <span class="at">cbar =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>), <span class="at">beta =</span> <span class="fu">bnd_ub</span>(<span class="dv">4</span>))</span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>bd_ub</span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis ----- Breakdown Frontier</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; Regression Sensitivity Analysis -- Breakdown Frontier [DMP (2026)]</span></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; ------------------------------------------------------------------------</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; Analysis:          DMP (2026)</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; Treatment:         tye_tfe890_500kNI_100_l6</span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; Outcome:           avgrep2000to2016</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &lt; 4</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; --- Summary statistics ----------------------------------</span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt;   Beta (short)                  1.9246</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt;   Beta (medium)                 2.0548</span></span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt;   R2 (short)                    0.0328</span></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">#&gt;   R2 (medium)                   0.1051</span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;   Var(Y)                      101.7387</span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt;   Var(X)                        0.9014</span></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt;   Var(X_Residual)               0.8823</span></span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt; --- Results ---------------------------------------------</span></span>
-<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt;   index breakdown</span></span>
-<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co">#&gt;       0    1.2807</span></span>
-<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co">#&gt;     0.1    1.1404</span></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="co">#&gt;     0.2    1.0362</span></span>
-<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="co">#&gt;     0.3   0.95706</span></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="co">#&gt;     0.4   0.89635</span></span>
-<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="co">#&gt;     0.5   0.85018</span></span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="co">#&gt;     0.6   0.81655</span></span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="co">#&gt;     0.7   0.79515</span></span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a><span class="co">#&gt;     0.8   0.78819</span></span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a><span class="co">#&gt;     0.9   0.78819</span></span>
-<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="co">#&gt;       1   0.78819</span></span></code></pre></div>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; Model:             avgrep2000to2016 ~ tye_tfe890_500kNI_100_l6</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; N (obs):           2036</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; Beta (medium):     2.0548</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt; Hypothesis:        Beta &lt; 4</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; Results:</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt;   index breakdown</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt;       0    1.2807</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt;     0.1    1.1404</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt;     0.2    1.0362</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co">#&gt;     0.3   0.95706</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;     0.4   0.89635</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt;     0.5   0.85018</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt;     0.6   0.81655</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt;     0.7   0.79515</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt;     0.8   0.78819</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt;     0.9   0.78819</span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co">#&gt;       1   0.78819</span></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="co">#&gt; Use summary() for the specification and full results.</span></span></code></pre></div>
 </div>
 <div id="bounding-the-unobservables-effect-on-the-outcome" class="section level3">
 <h3>Bounding the unobservable’s effect on the outcome</h3>
@@ -647,7 +623,7 @@ subscripts; here the results are already a data frame, so
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>b_ry  <span class="ot">&lt;-</span> <span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">rybar =</span> <span class="dv">2</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>b_eq  <span class="ot">&lt;-</span> <span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1,</span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>                        <span class="at">rybar_expr =</span> <span class="cf">function</span>(rx) rx)</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="fu">c</span>(<span class="at">rybar_2 =</span> b_ry<span class="sc">$</span>breakdown, <span class="at">rybar_eq =</span> b_eq<span class="sc">$</span>breakdown)</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="fu">c</span>(<span class="at">rybar_2 =</span> <span class="fu">breakdown_point</span>(b_ry), <span class="at">rybar_eq =</span> <span class="fu">breakdown_point</span>(b_eq))</span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt;   rybar_2  rybar_eq </span></span>
 <span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; 0.8035475 0.9583505</span></span></code></pre></div>
 </div>
@@ -682,8 +658,8 @@ not a curve.</p>
 <span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>                             <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
 <span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>                             <span class="at">r2long =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>),</span>
 <span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>                             <span class="at">beta =</span> <span class="st">&quot;sign&quot;</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="fu">c</span>(<span class="at">explain_away =</span> os_bd<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>],</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="at">sign_change  =</span> os_sign<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>])</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="fu">c</span>(<span class="at">explain_away =</span> <span class="fu">breakdown_point</span>(os_bd, <span class="at">signed =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span>],</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="at">sign_change  =</span> <span class="fu">breakdown_point</span>(os_sign)[<span class="dv">1</span>])</span>
 <span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt; explain_away  sign_change </span></span>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#&gt;          Inf          Inf</span></span>
 <span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="fu">plot</span>(os_sign)</span></code></pre></div>
@@ -709,10 +685,10 @@ above maps onto them.</p>
 way round – the frontier of DMP Theorem 4, and the only direction that
 can describe the part of it where no <code>rxbar</code> overturns the
 conclusion.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">regsen_breakdown</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>,</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>                  <span class="at">direction =</span> <span class="st">&quot;rybar&quot;</span>,</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>                  <span class="at">rxbar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>))<span class="sc">$</span>results</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt;   index breakdown</span></span>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">breakdown_frontier</span>(<span class="fu">regsen_breakdown</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>                                   <span class="at">direction =</span> <span class="st">&quot;rybar&quot;</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>                                   <span class="at">rxbar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)))</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co">#&gt;   rxbar breakdown</span></span>
 <span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co">#&gt; 1   0.5       Inf</span></span>
 <span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co">#&gt; 2   1.0 0.8632973</span></span>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; 3   2.0 0.5901671</span></span>
@@ -720,16 +696,16 @@ conclusion.</p>
 <p><code>clow</code> is the lower end of Assumption A6, asserting that
 the controls are <em>at least</em> that endogenous, which narrows the
 identified set.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>, <span class="at">clow =</span> <span class="fl">0.99</span>,</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>               <span class="at">rxbar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.9</span>))<span class="sc">$</span>results</span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">identified_set</span>(<span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>                             <span class="at">clow =</span> <span class="fl">0.99</span>, <span class="at">rxbar =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.9</span>)))</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt;   rxbar rybar cbar      bmin     bmax</span></span>
 <span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; 1   0.5   Inf    1 1.8463561 2.263163</span></span>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; 2   0.9   Inf    1 0.2911616 3.818357</span></span></code></pre></div>
 <p>And the identified set is computed for every triple of sensitivity
 parameters, including <code>rxbar &gt; rmax(cbar) &gt; rybar</code>,
 where both packages previously stopped:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>,</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>               <span class="at">rxbar =</span> <span class="dv">2</span>, <span class="at">rybar =</span> <span class="fl">0.5</span>)<span class="sc">$</span>results</span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">identified_set</span>(<span class="fu">regsen_bounds</span>(form, bfg2020, <span class="at">compare =</span> w1, <span class="at">cbar =</span> <span class="dv">1</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>                             <span class="at">rxbar =</span> <span class="dv">2</span>, <span class="at">rybar =</span> <span class="fl">0.5</span>))</span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co">#&gt;   rxbar rybar cbar      bmin     bmax</span></span>
 <span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co">#&gt; 1     2   0.5    1 0.4241849 3.774923</span></span></code></pre></div>
 </div>

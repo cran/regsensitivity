@@ -55,7 +55,7 @@ bd_ub
 b_ry  <- regsen_bounds(form, bfg2020, compare = w1, rybar = 2)
 b_eq  <- regsen_bounds(form, bfg2020, compare = w1,
                         rybar_expr = function(rx) rx)
-c(rybar_2 = b_ry$breakdown, rybar_eq = b_eq$breakdown)
+c(rybar_2 = breakdown_point(b_ry), rybar_eq = breakdown_point(b_eq))
 
 ## ----oster--------------------------------------------------------------------
 os <- regsen_bounds(form, bfg2020, compare = w1,
@@ -72,20 +72,20 @@ os_sign <- regsen_breakdown(form, bfg2020, compare = w1,
                              analysis = "oster",
                              r2long = seq(0, 1, 0.1),
                              beta = "sign")
-c(explain_away = os_bd$results$breakdown[1],
-  sign_change  = os_sign$results$breakdown[1])
+c(explain_away = breakdown_point(os_bd, signed = TRUE)[1],
+  sign_change  = breakdown_point(os_sign)[1])
 plot(os_sign)
 
 ## ----direction----------------------------------------------------------------
-regsen_breakdown(form, bfg2020, compare = w1, cbar = 1,
-                  direction = "rybar",
-                  rxbar = c(0.5, 1, 2, 4))$results
+breakdown_frontier(regsen_breakdown(form, bfg2020, compare = w1, cbar = 1,
+                                   direction = "rybar",
+                                   rxbar = c(0.5, 1, 2, 4)))
 
 ## ----clow---------------------------------------------------------------------
-regsen_bounds(form, bfg2020, compare = w1, cbar = 1, clow = 0.99,
-               rxbar = c(0.5, 0.9))$results
+identified_set(regsen_bounds(form, bfg2020, compare = w1, cbar = 1,
+                             clow = 0.99, rxbar = c(0.5, 0.9)))
 
 ## ----region-------------------------------------------------------------------
-regsen_bounds(form, bfg2020, compare = w1, cbar = 1,
-               rxbar = 2, rybar = 0.5)$results
+identified_set(regsen_bounds(form, bfg2020, compare = w1, cbar = 1,
+                             rxbar = 2, rybar = 0.5))
 

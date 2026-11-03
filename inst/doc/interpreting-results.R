@@ -34,34 +34,34 @@ set.seed(11)
 d <- make_world(beta = 1, pi2 = 0.2, g2 = 0.3, sy = 0.6)
 res <- regsen_bounds(form, d, compare = w1, cbar = 1)
 rho <- calibrate_rho(form, d, compare = w1)
-res$breakdown
+breakdown_point(res)
 rho
 
 ## ----robust-plot------------------------------------------------------------------------
-plot(res, xline = res$breakdown)
+plot(res, xline = breakdown_point(res))
 
 ## ----fragile----------------------------------------------------------------------------
 set.seed(12)
 d <- make_world(beta = 0, pi2 = 0.8, g2 = 0.8)
 res <- regsen_bounds(form, d, compare = w1, cbar = 1)
 rho <- calibrate_rho(form, d, compare = w1)
-c(beta_med = res$dgp$beta_med, breakdown = res$breakdown)
+c(beta_med = coef(res)[["medium"]], breakdown = breakdown_point(res))
 range(rho$rho) / 100
 
 ## ----fragile-plot-----------------------------------------------------------------------
-plot(res, xline = res$breakdown)
+plot(res, xline = breakdown_point(res))
 
 ## ----zero-------------------------------------------------------------------------------
 set.seed(11)
 d <- make_world(beta = 1, pi2 = 0.2, g2 = 0.3, sy = 0.6)
-regsen_breakdown(form, d, compare = w1, beta = bnd_lb(2))$results
+breakdown_frontier(regsen_breakdown(form, d, compare = w1, beta = bnd_lb(2)))
 
 ## ----weak-------------------------------------------------------------------------------
 set.seed(13)
 d <- make_world(beta = 1, pi2 = 0.5, g2 = 0.5, pi1 = rep(0.08, 6))
 res <- regsen_bounds(form, d, compare = w1, cbar = 1)
 r2 <- res$dgp$covwx_norm_sq / res$dgp$var_x        # R2 of X on W1
-c(R2_x_on_w1 = r2, rmax = sqrt(1 - r2), breakdown = res$breakdown)
+c(R2_x_on_w1 = r2, rmax = sqrt(1 - r2), breakdown = breakdown_point(res))
 calibrate_rho(form, d, compare = w1)
 
 ## ----bfg-setup--------------------------------------------------------------------------
@@ -73,34 +73,40 @@ bform <- reformulate(c("tye_tfe890_500kNI_100_l6", geo, "statea"),
                      response = "avgrep2000to2016")
 
 ## ----bfg-compare------------------------------------------------------------------------
-bp_geo <- regsen_bounds(bform, bfg2020, compare = geo, cbar = 1)$breakdown
-bp_all <- regsen_bounds(bform, bfg2020, cbar = 1)$breakdown  # FE in W1 too
+bp_geo <- breakdown_point(regsen_bounds(bform, bfg2020, compare = geo,
+                                       cbar = 1))
+bp_all <- breakdown_point(regsen_bounds(bform, bfg2020, cbar = 1))  # FE in W1
 c(geography_only = bp_geo, geography_and_state_FE = bp_all)
 
 ## ----cbar-------------------------------------------------------------------------------
 set.seed(11)
 d <- make_world(beta = 1, pi2 = 0.2, g2 = 0.3, sy = 0.6)
-regsen_breakdown(form, d, compare = w1, cbar = c(0, 0.25, 0.5, 0.75, 1))$results
+breakdown_frontier(regsen_breakdown(form, d, compare = w1,
+                                     cbar = c(0, 0.25, 0.5, 0.75, 1)))
 
 ## ----rybar------------------------------------------------------------------------------
 set.seed(11)
 d <- make_world(beta = 1, pi2 = 0.2, g2 = 0.3, sy = 0.6)
 sapply(c(Inf, 2, 1, 0.5), function(ry) {
-    regsen_breakdown(form, d, compare = w1, cbar = 1, rybar = ry)$results$breakdown
+    breakdown_point(regsen_breakdown(form, d, compare = w1, cbar = 1,
+                                     rybar = ry))
 })
 
 ## ----frontier---------------------------------------------------------------------------
 fr <- regsen_breakdown(form, d, compare = w1, cbar = 1,
                        direction = "rybar", rxbar = c(0.25, 0.5, 1, 2))
-fr$results
+breakdown_frontier(fr)
 
 ## ----oster------------------------------------------------------------------------------
 set.seed(12)
 d <- make_world(beta = 0, pi2 = 0.8, g2 = 0.8)
-d_eq   <- regsen_breakdown(form, d, compare = w1, analysis = "oster",
-                           r2long = 1, beta = bnd_eq(0))$results$breakdown
-d_sign <- regsen_breakdown(form, d, compare = w1, analysis = "oster",
-                           r2long = 1)$results$breakdown
+os_eq   <- regsen_breakdown(form, d, compare = w1, analysis = "oster",
+                            r2long = 1, beta = bnd_eq(0))
+os_sign <- regsen_breakdown(form, d, compare = w1, analysis = "oster",
+                            r2long = 1)
+# signed = TRUE: the sign of the explain away delta is part of the answer
+d_eq   <- breakdown_point(os_eq, signed = TRUE)
+d_sign <- breakdown_point(os_sign)
 c(explain_away = d_eq, sign_change = d_sign)
 
 ## ----oster-plot-------------------------------------------------------------------------

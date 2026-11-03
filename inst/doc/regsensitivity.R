@@ -53,7 +53,7 @@ print(fin)
 expr <- regsen_bounds(form, bfg2020, compare = compare,
                        rybar_expr = function(rx) rx,
                        rxbar = seq(0, 1, 0.1))
-expr$results
+identified_set(expr)
 
 ## -----------------------------------------------------------------------------
 bd <- regsen_breakdown(form, bfg2020, compare = compare,
@@ -69,12 +69,12 @@ print(hyp)
 fr <- regsen_breakdown(form, bfg2020, compare = compare, cbar = 1,
                         direction = "rybar",
                         rxbar = c(0.5, 1, 2, 4))
-fr$results
+breakdown_frontier(fr)
 
 ## -----------------------------------------------------------------------------
 vapply(c(0, 0.9, 0.99), function(cl) {
-    regsen_breakdown(form, bfg2020, compare = compare,
-                      cbar = 1, clow = cl)$results$breakdown
+    breakdown_point(regsen_breakdown(form, bfg2020, compare = compare,
+                                     cbar = 1, clow = cl))
 }, numeric(1))
 
 ## -----------------------------------------------------------------------------

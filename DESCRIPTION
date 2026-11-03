@@ -1,7 +1,7 @@
 Package: regsensitivity
 Type: Package
 Title: Regression Sensitivity Analysis for Omitted Variable Bias
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person("Mike", "Nguyen", , "nguyennghia1301@gmail.com",
            role = c("aut", "cre", "cph"),
@@ -36,9 +36,9 @@ Config/Needs/coverage: covr
 Config/Needs/lint: lintr
 RoxygenNote: 7.3.3
 NeedsCompilation: no
-Packaged: 2026-10-07 17:32:43 UTC; mikenguyen
+Packaged: 2026-11-03 01:35:00 UTC; mikenguyen
 Author: Mike Nguyen [aut, cre, cph] (ORCID:
     <https://orcid.org/0000-0002-3432-8595>)
 Maintainer: Mike Nguyen <nguyennghia1301@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-10-20 13:50:02 UTC
+Date/Publication: 2026-11-03 09:20:17 UTC

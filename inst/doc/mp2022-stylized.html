@@ -343,7 +343,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <p>This vignette illustrates, on a <em>stylized</em> constructed
-example, the figures of <strong>Masten and Poirier (2026),</strong> <a href="https://arxiv.org/abs/2208.00552"><em>The Effect of Omitted
+example, the figures of <strong>Masten and Poirier (2026),</strong> <a href="https://doi.org/10.1257/aer.20230242"><em>The Effect of Omitted
 Variables on the Sign of Regression Coefficients</em></a>. The paper’s
 Figures 1, 2, and S1 are built on its empirical application to
 Satyanath, Voigtländer and Voth (2017), whose microdata is distributed
@@ -458,11 +458,11 @@ bias to carry <span class="math inline">\(\beta\)</span> all the way
 from <span class="math inline">\(\beta_{med}\)</span> to zero, so any
 cap below <span class="math inline">\(\beta_{med}\)</span> rules one out
 and the breakdown point is <span class="math inline">\(+\infty\)</span>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>bmed <span class="ot">&lt;-</span> <span class="fu">regsen_bounds</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                       <span class="at">delta =</span> <span class="dv">0</span>, <span class="at">r2long =</span> <span class="dv">1</span>)<span class="sc">$</span>dgp<span class="sc">$</span>beta_med</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>bmed <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">regsen_bounds</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                            <span class="at">delta =</span> <span class="dv">0</span>, <span class="at">r2long =</span> <span class="dv">1</span>))[[<span class="st">&quot;medium&quot;</span>]]</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fu">round</span>(bmed, <span class="dv">3</span>) <span class="sc">+</span> <span class="fl">0.001</span>), <span class="cf">function</span>(M) {</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="fu">regsen_breakdown</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                      <span class="at">r2long =</span> <span class="dv">1</span>, <span class="at">maxovb =</span> M)<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="fu">breakdown_point</span>(<span class="fu">regsen_breakdown</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                                     <span class="at">r2long =</span> <span class="dv">1</span>, <span class="at">maxovb =</span> M))[<span class="dv">1</span>]</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>})</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; [1]      Inf      Inf 1.233942</span></span></code></pre></div>
 <p>Above that threshold the cap binds without forbidding the sign
@@ -473,11 +473,11 @@ the cap loosens:</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">regsen_breakdown</span>(form, dat,</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                           <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                           <span class="at">r2long =</span> <span class="dv">1</span>, <span class="at">maxovb =</span> M)</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">maxovb =</span> M, <span class="at">breakdown =</span> r<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">maxovb =</span> M, <span class="at">breakdown =</span> <span class="fu">breakdown_point</span>(r)[<span class="dv">1</span>])</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>})</span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, out)</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>uncapped <span class="ot">&lt;-</span> <span class="fu">regsen_breakdown</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>                              <span class="at">r2long =</span> <span class="dv">1</span>)<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>]</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>uncapped <span class="ot">&lt;-</span> <span class="fu">breakdown_point</span>(<span class="fu">regsen_breakdown</span>(form, dat, <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>                                             <span class="at">r2long =</span> <span class="dv">1</span>))[<span class="dv">1</span>]</span>
 <span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
 <span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="fu">ggplot</span>(out, <span class="fu">aes</span>(maxovb, breakdown)) <span class="sc">+</span></span>
 <span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;grey40&quot;</span>) <span class="sc">+</span></span>
@@ -508,7 +508,7 @@ meta-analysis data in and call:</p>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                             <span class="at">analysis =</span> <span class="st">&quot;oster&quot;</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                             <span class="at">r2long =</span> <span class="dv">1</span>, <span class="at">maxovb =</span> study<span class="sc">$</span>maxovb,</span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                             <span class="at">beta =</span> <span class="fu">bnd_eq</span>(<span class="dv">0</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    out<span class="sc">$</span>results<span class="sc">$</span>breakdown[<span class="dv">1</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="fu">breakdown_point</span>(out, <span class="at">signed =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span>]</span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 
