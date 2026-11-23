@@ -1,14 +1,14 @@
-83e5e92f568102b130e6257e6283f556 *DESCRIPTION
+5b12ffb1902d385615784ec6be8182ba *DESCRIPTION
 cfd9b5f546d58bfb7a8c691fa489a67a *LICENSE
 249ddd86c7fcc08fb2116bbbb36aebd2 *NAMESPACE
-567c1584c5e74fc6f59fc31ff322238f *NEWS.md
+19b1253323470d87448f97f879fe18d3 *NEWS.md
 87f81ce82c5352f431f4482640e25f44 *R/accessors.R
 e6504c294d0b90ea3bbe0cd6b6226433 *R/api.R
-110b79b88d80951c22b05c83eaddb550 *R/bootstrap.R
+9b54dbf34ccdb25d5c8b944c4dee3e84 *R/bootstrap.R
 ab6235be08b275fbb81101ecd0497196 *R/broom.R
 92fd5cb637dec912ddad3533236a5463 *R/calibrate.R
 8cb412399acae6f150dda09948885cd5 *R/data.R
-24827894238daaa549cdbb96012052ea *R/dgp.R
+301ae851a9dccaabb132568bf45ccd7f *R/dgp.R
 856b85542dac83111d83fe09d977e9aa *R/display.R
 6ec0f92d1a42c0145fcf3c09a6571112 *R/dmp.R
 0d29ad59082a5ec35a22a6fea7cfc703 *R/explore.R
@@ -20,7 +20,7 @@ a5daa5400740aada4138c25c214a7c8f *R/oster.R
 7601b4a320bcf0497ce424a4a2ea7c28 *R/theme.R
 53d01a7b1bdbeeea67bcf852ec4401fd *R/utils.R
 760340ab5b71382f64685354276bcb80 *R/zzz.R
-d8235eeebdcfebf9b48bbe2fe09d32d6 *README.md
+a8b39d22a50e081ea6c66b1e6dfd4075 *README.md
 c83881cb0c333e33a998388b35685091 *build/vignette.rds
 287e964aeecbb4318afb9d550f4a5d96 *data/bfg2020.rda
 0cc630143bb4ebbffeb8dbbacf219f19 *inst/CITATION
@@ -82,7 +82,7 @@ df70334d5b76fdeeec0c326b4173773f *tests/testthat.R
 c89e459c1b19f343b65172263bfd5b53 *tests/testthat/test-bootstrap.R
 0d6623953ea1abff807496f5f8351354 *tests/testthat/test-broom.R
 8c4d6abe3fe63bd4f0308cf4f54d7195 *tests/testthat/test-dgp.R
-8602c5637d920ca574e8f72fd7c3ed0a *tests/testthat/test-dmp-region.R
+878099192b6fa3cfc005e825dea1a966 *tests/testthat/test-dmp-region.R
 2b083acf463facf35e332e9326b89fb6 *tests/testthat/test-dmp.R
 72fed369d7e82233bc947b232ac0bda5 *tests/testthat/test-explore.R
 e8b70c4a8c73f44696d83ce5f37071bc *tests/testthat/test-methods.R
@@ -96,7 +96,7 @@ b3dcc059bed6b40455aa1d1a056a886e *tests/testthat/test-plot.R
 679d08a46fc0f9cf9a152465dbd10c2d *tests/testthat/test-snapshot-numerics.R
 c394ee318b42c457e5d5290270f5d560 *tests/testthat/test-table.R
 9bd7b53986edc12cd5d2afe6d2a0f77c *tests/testthat/test-utils.R
-676bebeb99150888bc07063aa6743285 *tests/testthat/test-validation.R
+b2fef3160e6d747a8a22e3b1af101f16 *tests/testthat/test-validation.R
 a3498e4016630ff0fc4338c069410a86 *tests/testthat/test-vignette-replication.R
 0abfdcbcf94ef33f3d5bb31f7034a7de *vignettes/dmp2022-replication.Rmd
 e76c1799d961543b0bb1aa3991839376 *vignettes/figures/covariates.png
